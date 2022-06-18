@@ -18,7 +18,7 @@
     "depends": ["hs_electronic_invoice", "point_of_sale"],
     # always loaded
     "data": [
-        "views/assets.xml",
+        # "views/assets.xml",
         "views/invoice_pos_conf.xml"
     ],
     # only loaded in demonstration mode
