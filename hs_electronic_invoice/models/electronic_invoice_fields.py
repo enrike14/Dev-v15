@@ -177,6 +177,8 @@ class electronic_invoice_fields(models.Model):
     api_token = fields.Char(string="ApiToken", store="True", default='')
     puntoFacturacion = fields.Char(
         string="Punto Fac", store="True", default='')
+    cafe = fields.Char(string='CAFE', readonly="True", store="True")
+    qr_pos = fields.Char(string='QR POS', readonly="True", store="True")
 
     @api.depends('qr_code')
     def on_change_pago(self):
@@ -387,6 +389,8 @@ class electronic_invoice_fields(models.Model):
             tipo_doc_text = respuesta['mensaje']
 
             if 'qr' in respuesta and 'cufe' in respuesta:
+                self.qr_pos = str(respuesta['qr'])
+                self.cafe = str(respuesta['cufe'])
                 tipo_doc_text = "Factura Electrónica Creada" + \
                     " :<br> <b>CUFE:</b> (<a target='_blank' href='" + \
                     respuesta['qr']+"'>"+str(respuesta['cufe'])+")</a><br>"
